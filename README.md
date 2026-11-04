@@ -92,4 +92,5 @@ Use case: product-mockup. Asset type: transparent-background travel website hero
 
 Geometria: [Natural Earth, land 1:110m](https://github.com/nvkelso/natural-earth-vector/blob/master/geojson/ne_110m_land.geojson), em [domínio público](https://www.naturalearthdata.com/about/terms-of-use/). Silhueta decorativa sem fronteiras ou rótulos, armazenada em `public/images/world-map.svg`.
 #   r o t e i r o s . m r l  
+ #   r o t e i r o s . m r l  
  
