@@ -1,0 +1,40 @@
+#root { position: relative; isolation: isolate; min-height: 100vh; }
+.site-content { position: relative; z-index: 1; }
+.world-background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  --map-x: 50%;
+  --map-y: 50%;
+  --map-presence: 0;
+}
+.world-map-mask {
+  position: absolute;
+  inset: 0;
+  mask-image: url('/images/world-map.svg');
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: min(2200px, 175vw) auto;
+  -webkit-mask-image: url('/images/world-map.svg');
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: min(2200px, 175vw) auto;
+}
+.world-map-base { background: #173a5e; opacity: 0.035; }
+.world-map-spotlight {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle 260px at var(--map-x) var(--map-y), #173a5e24, #cd9a490c 60%, transparent 100%);
+  opacity: var(--map-presence);
+  transition: opacity 450ms ease;
+}
+.world-map-interactive .cursor-grid { position: absolute; inset: 0; }
+@media (max-width: 700px) {
+  .world-map-mask { mask-size: 260vw auto; -webkit-mask-size: 260vw auto; }
+  .world-map-base { opacity: 0.025; }
+}
+@media (prefers-reduced-motion: reduce), (hover: none), (pointer: coarse) {
+  .world-map-interactive { display: none; }
+}
