@@ -12,18 +12,8 @@ export function setMeta(title, description) {
 }
 export function usePageMeta(title, description) { useEffect(() => setMeta(title, description), [title, description]); }
 
-// Só considera o roteiro disponível se o arquivo realmente existir e for PDF (verificado uma vez por destino).
-const pdfCache = new Map();
-const checkPdf = (d) => {
-  if (!hasPdf(d)) return Promise.resolve(false);
-  if (!pdfCache.has(d.pdfUrl)) pdfCache.set(d.pdfUrl, fetch(d.pdfUrl, { method: 'HEAD', cache: 'no-cache' }).then(r => r.ok && /pdf/i.test(r.headers.get('content-type') || '')).catch(() => false));
-  return pdfCache.get(d.pdfUrl);
-};
-export function usePdfAvailable(d) {
-  const [ok, setOk] = useState(false);
-  useEffect(() => { let live = true; setOk(false); checkPdf(d).then(v => live && setOk(v)); return () => { live = false; }; }, [d?.pdfUrl]);
-  return ok;
-}
+// Disponibilidade vem do manifesto gerado no build (só PDFs existentes em public/roteiros): sem requisições extras.
+export const usePdfAvailable = (d) => !!d && hasPdf(d);
 
 // Baixa o PDF do próprio site e dispara o download direto; falha (arquivo ausente ou resposta que não é PDF) vira mensagem com nova tentativa.
 function DownloadButton({ destination }) {

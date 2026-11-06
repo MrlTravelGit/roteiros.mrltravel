@@ -1,3 +1,4 @@
+import pdfManifest from './pdf-manifest.json';
 // Identidade visual: edite as variáveis --brand e --accent em styles.css.
 // Para publicar um roteiro: coloque o PDF em public/roteiros/<slug>.pdf e preencha pdfUrl (ex.: '/roteiros/maceio.pdf').
 // whatsappUrl, groupsUrl e instagramUrl: contatos da agência usados nas páginas de destino.
@@ -6,7 +7,7 @@ export const whatsappLink = (text) => `${agency.whatsappUrl}&text=${encodeURICom
 // Um PDF só é válido se for um arquivo .pdf servido pelo próprio site (caminho iniciado por /).
 export const hasPdf = (d) => /^\/[^/].*\.pdf$/i.test(d.pdfUrl || '');
 export const pdfFilename = (d) => `roteiro-${d.slug}-mrl-travel.pdf`;
-export const destinations = [
+const baseDestinations = [
   { slug: 'maceio', name: 'Maceió', state: 'Alagoas', region: 'Nordeste', description: 'O azul do mar é só o começo da história.', image: '/images/maceio.jpg', imageAlt: 'Vista aérea da praia de Ponta Verde em Maceió', pdfUrl: '/roteiros/maceio.pdf' },
   { slug: 'maragogi', name: 'Maragogi', state: 'Alagoas', region: 'Nordeste', description: 'Um convite para desacelerar e mergulhar.', image: '/images/maragogi.jpg', imageAlt: 'Águas claras e piscinas naturais em Maragogi', pdfUrl: '' },
   { slug: 'florianopolis', name: 'Florianópolis', state: 'Santa Catarina', region: 'Sul', description: 'Uma ilha, muitas formas de se encantar.', image: '/images/florianopolis.jpg', imageAlt: 'Ponte Hercílio Luz em Florianópolis', pdfUrl: '' },
@@ -43,3 +44,5 @@ export const destinations = [
   {"slug": "salvador", "name": "Salvador", "state": "Bahia", "region": "Nordeste", "description": "Uma cidade de encontros para sentir e descobrir.", "image": "/images/salvador.jpg", "imageAlt": "Paisagem de Salvador", "pdfUrl": ""},
   {"slug": "penha-beto-carrero", "name": "Penha (Beto Carrero)", "state": "Santa Catarina", "region": "Sul", "description": "Uma aventura para compartilhar e lembrar por muito tempo.", "image": "/images/penha-beto-carrero.jpg", "imageAlt": "Paisagem de Penha (Beto Carrero)", "pdfUrl": ""},
 ];
+// pdfUrl vem do manifesto gerado automaticamente (scripts/generate-pdf-manifest.mjs) a partir de public/roteiros/*.pdf.
+export const destinations = baseDestinations.map(d => ({ ...d, pdfUrl: pdfManifest[d.slug] || '' }));

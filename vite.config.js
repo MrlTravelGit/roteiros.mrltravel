@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { join } from 'node:path';
+import { generatePdfManifest } from './scripts/generate-pdf-manifest.mjs';
 import { destinations } from './src/content.js';
 
 // Hospedagem estática: gera dist/roteiros/<slug>/index.html (mesmo app, com título e descrição próprios)
@@ -28,4 +29,16 @@ function destinationPages() {
     },
   };
 }
-export default defineConfig({ plugins: [destinationPages()] });
+// Mantém src/pdf-manifest.json em dia: no início do build/dev e quando PDFs entram ou saem de public/roteiros.
+function pdfManifest() {
+  return {
+    name: 'pdf-manifest',
+    buildStart() { generatePdfManifest(); },
+    configureServer(server) {
+      const regen = (f) => { if (/[\\/]public[\\/]roteiros[\\/][^\\/]+\.pdf$/i.test(f)) generatePdfManifest(); };
+      server.watcher.add('public/roteiros');
+      for (const ev of ['add', 'unlink']) server.watcher.on(ev, regen);
+    },
+  };
+}
+export default defineConfig({ plugins: [pdfManifest(), destinationPages()] });
