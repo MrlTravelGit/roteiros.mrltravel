@@ -1,6 +1,6 @@
 import pdfManifest from './pdf-manifest.json';
 // Identidade visual: edite as variáveis --brand e --accent em styles.css.
-// Para publicar um roteiro: coloque o PDF em public/roteiros/<slug>.pdf e preencha pdfUrl (ex.: '/roteiros/maceio.pdf').
+// Para publicar um roteiro: coloque o PDF em public/roteiros/. O manifesto reconhece <slug>.pdf e nomes descritivos.
 // whatsappUrl, groupsUrl e instagramUrl: contatos da agência usados nas páginas de destino.
 export const agency = { name: 'MRL', suffix: 'TRAVEL', instagramUrl: 'https://instagram.com/mrltravel', whatsappUrl: 'https://api.whatsapp.com/send?phone=5537998128584', footerWhatsappUrl: 'https://api.whatsapp.com/send?text=SITE%20-%2030/10/2026&phone=5537998128584', groupsUrl: 'https://mrltravel.com/grupos/' };
 export const whatsappLink = (text) => `${agency.whatsappUrl}&text=${encodeURIComponent(text)}`;
@@ -11,6 +11,7 @@ const baseDestinations = [
   { slug: 'maceio', name: 'Maceió', state: 'Alagoas', region: 'Nordeste', description: 'O azul do mar é só o começo da história.', image: '/images/maceio.jpg', imageAlt: 'Vista aérea da praia de Ponta Verde em Maceió', pdfUrl: '/roteiros/maceio.pdf' },
   { slug: 'maragogi', name: 'Maragogi', state: 'Alagoas', region: 'Nordeste', description: 'Um convite para desacelerar e mergulhar.', image: '/images/maragogi.jpg', imageAlt: 'Águas claras e piscinas naturais em Maragogi', pdfUrl: '' },
   { slug: 'florianopolis', name: 'Florianópolis', state: 'Santa Catarina', region: 'Sul', description: 'Uma ilha, muitas formas de se encantar.', image: '/images/florianopolis.jpg', imageAlt: 'Ponte Hercílio Luz em Florianópolis', pdfUrl: '' },
+  { slug: 'chapada-diamantina', name: 'Chapada Diamantina', state: 'Bahia', region: 'Nordeste', month: 'Abril', description: 'Cachoeiras, trilhas e paisagens impressionantes no coração da Bahia.', image: '/images/chapada-diamantina.jpg', imageAlt: 'Vales e formações rochosas da Chapada Diamantina na Bahia', pdfUrl: '' },
   {"slug": "foz-do-iguacu", "name": "Foz do Iguaçu", "state": "Paraná", "region": "Sul", "description": "Uma viagem para sentir a força da natureza.", "image": "/images/foz-do-iguacu.jpg", "imageAlt": "Vista das Cataratas do Iguaçu", "pdfUrl": ""},
   {"slug": "bonito", "name": "Bonito", "state": "Mato Grosso do Sul", "region": "Centro-Oeste", "description": "Águas transparentes e descobertas pelo caminho.", "image": "/images/bonito.jpg", "imageAlt": "Águas cristalinas do Rio Sucuri em Bonito", "pdfUrl": ""},
   {"slug": "lencois-maranhenses", "name": "Lençóis Maranhenses", "state": "Maranhão", "region": "Nordeste", "description": "Entre dunas e lagoas, um novo jeito de se encantar.", "image": "/images/lencois-maranhenses.jpg", "imageAlt": "Dunas e lagoas dos Lençóis Maranhenses", "pdfUrl": ""},
