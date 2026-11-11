@@ -78,7 +78,7 @@ export function DestinationPage({ slug, navigate }) {
         {available ? <>
           <p>Baixe gratuitamente nosso roteiro e descubra o melhor desse destino.</p>
           <div className="itinerary-actions"><DownloadButton destination={d}/></div>
-          <p className="file-info"><span className="pdf-chip">PDF GRATUITO</span> Download gratuito • Sem cadastro</p>
+          <p className="file-info"><span className="pdf-chip">PDF GRATUITO</span> Download gratuito</p>
         </> : <>
           <p>Estamos preparando um roteiro especial para você aproveitar o melhor desse destino.</p>
           <p className="file-info"><FileText size={18}/> Roteiro em PDF disponível em breve</p>
